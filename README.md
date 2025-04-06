@@ -1,24 +1,17 @@
 <div align="center">
   <img alt="svelte simple icons" src="./docs/svg/svelte-simple-icons.svg" width="150" />
 
-# svelte-simple-icons
+# svelte-simple-icons-with-classes
 
-This package provides the [Simple Icons 14.7.0](https://github.com/simple-icons/simple-icons/releases/tag/14.7.0) packaged as a set of [Svelte](https://svelte.dev/) components.
+This package provides the [Simple Icons 14.7.0](https://github.com/simple-icons/simple-icons/releases/tag/14.7.0) packaged as a set of [Svelte 5](https://svelte.dev/) components with improved class handling.
 
-  <a href="https://www.npmjs.com/package/@icons-pack/svelte-simple-icons" target="_blank">
-    <img src="https://img.shields.io/npm/v/@icons-pack/svelte-simple-icons?color=CB061D&style=flat-square" alt="www.npmjs.com!" />
+> This is a fork of [@icons-pack/svelte-simple-icons](https://github.com/icons-pack/svelte-simple-icons) updated for Svelte 5 compatibility and enhanced class support.
+
+  <a href="https://www.npmjs.com/package/svelte-simple-icons-with-classes" target="_blank">
+    <img src="https://img.shields.io/npm/v/svelte-simple-icons-with-classes?color=CB061D&style=flat-square" alt="npm version" />
   </a>
-
-  <a href="https://travis-ci.com/github/icons-pack/svelte-simple-icons" target="_blank">
-    <img src="https://img.shields.io/travis/icons-pack/svelte-simple-icons?color=008660&style=flat-square" alt="builds!" />
-  </a>
-
-  <a href="https://www.npmjs.com/package/@icons-pack/svelte-simple-icons" target="_blank">
-    <img src="https://img.shields.io/npm/dw/@icons-pack/svelte-simple-icons?color=087BB4&style=flat-square" alt="downloads" />
-  </a>
-
-  <a href="https://github.com/icons-pack/svelte-simple-icons/blob/canary/LICENSE" target="_blank">
-    <img src="https://img.shields.io/npm/l/@icons-pack/svelte-simple-icons?color=008660&style=flat-square" alt="licence" />
+  <a href="https://github.com/YOUR_USERNAME/svelte-simple-icons-with-classes/blob/main/LICENSE" target="_blank">
+    <img src="https://img.shields.io/npm/l/svelte-simple-icons-with-classes?color=008660&style=flat-square" alt="licence" />
   </a>
 </div>
 
@@ -27,89 +20,90 @@ This package provides the [Simple Icons 14.7.0](https://github.com/simple-icons/
 Install the package in your project directory with:
 
 ```sh
-// with yarn
-yarn add @icons-pack/svelte-simple-icons
+# with npm
+npm install svelte-simple-icons-with-classes
 
-// with npm
-npm add @icons-pack/svelte-simple-icons
+# with yarn
+yarn add svelte-simple-icons-with-classes
+
+# with pnpm
+pnpm add svelte-simple-icons-with-classes
 ```
 
 ## Usage
 
 All icons are imported from a single file, where [ICON SLUG] is replaced by a capitalized [slug](https://github.com/simple-icons/simple-icons/blob/master/slugs.md).
 
-## Demo
-
-[Edit codesandbox](https://codesandbox.io/s/busy-satoshi-g52wq?file=/App.svelte)
-
 ## Basic example
 
 ```svelte
-  <!-- Import a specific icon by its slug as: -->
-  <!-- import { Si[ICON SLUG] } from 'simple-icons'; -->
+<script lang="ts">
+  // Import specific icons by their slug
+  import { SiReact, SiSvelte, SiDocker } from "svelte-simple-icons-with-classes";
+</script>
 
-  <script>
-    import { SiReact, SiSvelte, SiDocker } from "@icons-pack/svelte-simple-icons";
-  </script>
-
-  <SiSvelte color="#FF3E00" size={90} />
-
-  <SiReactJs color="#61DAFB" size={50} />
-
-  <SiDocker />
+<SiSvelte color="#FF3E00" size={90} />
+<SiReact color="#61DAFB" size={50} />
+<SiDocker />
 ```
 
-## Change title
+## Changing title
 
 ```svelte
-  <!-- title default "Svelte" -->
-  <script>
-    import { SiSvelte } from "@icons-pack/svelte-simple-icons";
-  </script>
+<script lang="ts">
+  import { SiSvelte } from "svelte-simple-icons-with-classes";
+</script>
 
-  <SiSvelte title="My title" />
+<!-- title default is "svelte" -->
+<SiSvelte title="My custom title" />
 ```
 
 ## Custom styles
 
 ```svelte
-  <script>
-    import { SiSvelte } from "@icons-pack/svelte-simple-icons";
-  </script>
+<script lang="ts">
+  import { SiSvelte } from "svelte-simple-icons-with-classes";
+</script>
 
-  <SiSvelte class="myStyle" />
+<SiSvelte class="my-icon" />
 
-  <style>
-    .myStyle {
-      width: 35px;
-      height: 35px;
-    }
-  </style>
+<style>
+  :global(.my-icon) {
+    width: 35px;
+    height: 35px;
+  }
+</style>
 ```
 
-## Type Definition for Dynamic Icons in Svelte Components
+## Type Definition for Dynamic Icons in Svelte 5 Components
 
-Sometimes, we want to provide the component dynamically to a component. We can do that by using `svelte:component` feature with the
-helper type `SiComponentType` type definition.
+For dynamic icon components using Svelte 5's syntax:
 
 ```svelte
 <script lang="ts">
-  import type { SiComponentType } from '@icons-pack/svelte-simple-icons';
-
-  export let icon: SiComponentType;
-  export let text: string;
-  export let click: () => void = () => console.log('do something');
+  import type { SiComponentType } from 'svelte-simple-icons-with-classes';
+  
+  let { 
+    icon,
+    text,
+    onClick = () => console.log('do something')
+  } = $props<{
+    icon: SiComponentType;
+    text: string;
+    onClick?: () => void;
+  }>();
 </script>
 
-<button on:click={click}>
-  <svelte:component
-    this={icon}
-    title={text} <!-- optional, along with size and color properties -->
-  />
+<button onclick={onClick}>
+  {@render icon({
+    title: text,
+    size: 24,
+    class: "icon"
+  })}
   {text}
 </button>
 
-<style lang="scss">
+<style>
   button {
     display: flex;
     flex-direction: row;
@@ -119,8 +113,8 @@ helper type `SiComponentType` type definition.
     box-shadow: none;
     text-shadow: none;
   }
-
-  .icon {
+  
+  :global(.icon) {
     margin: 4px 4px 0 0;
   }
 </style>
@@ -128,14 +122,37 @@ helper type `SiComponentType` type definition.
 
 ## Faster Compilations
 
-If you only need a few icons, you can import them individually instead of the entire file to improve compilation.
+If you only need a few icons, you can import them individually from the icons directory:
 
 ```svelte
-<script>
-  import SiSvelte from "@icons-pack/svelte-simple-icons/icons/SiSvelte.svelte";
-  import SiGithub from "@icons-pack/svelte-simple-icons/icons/SiGithub.svelte";
+<script lang="ts">
+  import SiSvelte from "svelte-simple-icons-with-classes/dist/icons/SiSvelte.svelte";
+  import SiGithub from "svelte-simple-icons-with-classes/dist/icons/SiGithub.svelte";
 </script>
 
 <SiGithub />
 <SiSvelte />
 ```
+
+## Svelte 5 Compatibility
+
+This library takes advantage of Svelte 5's new features:
+
+- Uses the `$props()` rune instead of the older `export let` syntax
+- Handles class forwarding properly with Svelte 5's class handling
+- Compatible with Svelte 5's rendering system
+- Properly typed for TypeScript usage
+
+## Differences from the original
+
+Key differences from the original `@icons-pack/svelte-simple-icons`:
+
+1. Uses Svelte 5's runes system for props and reactivity
+2. Updated event handling to match Svelte 5 patterns 
+3. Improved TypeScript types
+4. Better class and style prop forwarding
+5. Uses `snake_case` for variable and function names according to the Svelte 5 style guide
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).

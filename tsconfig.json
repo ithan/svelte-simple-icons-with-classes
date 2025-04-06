@@ -9,11 +9,26 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "ignoreDeprecations": "5.0"
+    "ignoreDeprecations": "5.0",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES2020"
   },
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //
   // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
   // from the referenced tsconfig.json - TypeScript does not merge them in
-  "exclude": ["scripts", "*.js", "../node_modules/**", "./[!ambient.d.ts]**"]
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.svelte",
+    "scripts/**/*.ts",
+    "src/lib/icons/**/*.svelte"
+  ],
+  "exclude": [
+    "*.js",
+    "../node_modules/**",
+    "./[!ambient.d.ts]**"
+  ]
 }
