@@ -3,7 +3,7 @@
 
 # svelte-simple-icons-with-classes
 
-This package provides the [Simple Icons 14.7.0](https://github.com/simple-icons/simple-icons/releases/tag/14.7.0) packaged as a set of [Svelte 5](https://svelte.dev/) components with improved class handling.
+This package provides the [Simple Icons 14.12.1](https://github.com/simple-icons/simple-icons/releases/tag/14.12.1) packaged as a set of [Svelte 5](https://svelte.dev/) components with improved class handling.
 
 > This is a fork of [@icons-pack/svelte-simple-icons](https://github.com/icons-pack/svelte-simple-icons) updated for Svelte 5 compatibility and enhanced class support.
 
@@ -32,7 +32,7 @@ pnpm add svelte-simple-icons-with-classes
 
 ## Usage
 
-All icons are imported from a single file, where [ICON SLUG] is replaced by a capitalized [slug](https://github.com/simple-icons/simple-icons/blob/master/slugs.md).
+All icons are imported from a single file, where [ICON SLUG] is replaced by a capitalized [slug](https://github.com/simple-icons/simple-icons/blob/master/slugs.md) with a `Si` prefix.
 
 ## Basic example
 
@@ -54,7 +54,7 @@ All icons are imported from a single file, where [ICON SLUG] is replaced by a ca
   import { SiSvelte } from "svelte-simple-icons-with-classes";
 </script>
 
-<!-- title default is "svelte" -->
+<!-- title default is "Svelte" -->
 <SiSvelte title="My custom title" />
 ```
 
@@ -126,8 +126,8 @@ If you only need a few icons, you can import them individually from the icons di
 
 ```svelte
 <script lang="ts">
-  import SiSvelte from "svelte-simple-icons-with-classes/dist/icons/SiSvelte.svelte";
-  import SiGithub from "svelte-simple-icons-with-classes/dist/icons/SiGithub.svelte";
+  import SiSvelte from "svelte-simple-icons-with-classes/icons/SiSvelte.svelte";
+  import SiGithub from "svelte-simple-icons-with-classes/icons/SiGithub.svelte";
 </script>
 
 <SiGithub />
@@ -143,15 +143,33 @@ This library takes advantage of Svelte 5's new features:
 - Compatible with Svelte 5's rendering system
 - Properly typed for TypeScript usage
 
+## TypeScript Support
+
+This package is fully written in TypeScript and provides:
+
+- Type-safe component imports
+- TypeScript definitions for all components
+- Type declarations for props and events
+- Support for TypeScript projects using Svelte 5
+
+## Cross-Platform Compatibility
+
+All build scripts work seamlessly across both Windows and Unix-based systems:
+
+- Build process works on Windows, macOS, and Linux
+- Scripts handle path differences automatically
+- No dependency on platform-specific shell commands
+
 ## Differences from the original
 
 Key differences from the original `@icons-pack/svelte-simple-icons`:
 
 1. Uses Svelte 5's runes system for props and reactivity
 2. Updated event handling to match Svelte 5 patterns 
-3. Improved TypeScript types
+3. Fully migrated to TypeScript with complete type definitions
 4. Better class and style prop forwarding
 5. Uses `snake_case` for variable and function names according to the Svelte 5 style guide
+6. Cross-platform build process for Windows and Unix systems
 
 ## License
 
