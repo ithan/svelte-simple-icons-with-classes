@@ -29,7 +29,7 @@ const pathsToClean = [
  * Removes a file or directory recursively
  * @param filePath - Path to file or directory to remove
  */
-async function removePath(filePath: string): Promise<void> {
+async function remove_path(filePath: string): Promise<void> {
   try {
     // Check if the path exists before attempting to remove it
     const stats = await fs.stat(filePath).catch(() => null);
@@ -56,12 +56,12 @@ async function removePath(filePath: string): Promise<void> {
 /**
  * Main function to clean all paths
  */
-async function cleanPaths(): Promise<void> {
+async function clean_paths(): Promise<void> {
   console.log('Starting cleanup process...');
   
   try {
     // Process all paths in parallel for efficiency
-    await Promise.all(pathsToClean.map(removePath));
+    await Promise.all(pathsToClean.map(remove_path));
     console.log('Cleanup completed successfully!');
   } catch (error) {
     console.error('Cleanup failed:', error);
@@ -70,4 +70,4 @@ async function cleanPaths(): Promise<void> {
 }
 
 // Execute the cleaning process
-cleanPaths();
+clean_paths();

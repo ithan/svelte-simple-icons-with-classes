@@ -18,7 +18,7 @@ const iconsDir = path.join(rootDir, 'src', 'lib', 'icons');
 /**
  * Removes the icons directory and its contents
  */
-async function cleanIcons(): Promise<void> {
+async function clean_icons(): Promise<void> {
   console.log(`Cleaning icons directory: ${iconsDir}`);
   
   try {
@@ -39,4 +39,4 @@ async function cleanIcons(): Promise<void> {
 }
 
 // Execute the cleaning process
-cleanIcons();
+clean_icons();

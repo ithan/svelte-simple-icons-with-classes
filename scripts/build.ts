@@ -19,7 +19,7 @@ const rootDir = path.resolve(__dirname, '..');
  * @param cwd - Current working directory for the command
  * @returns Promise that resolves on completion or rejects on error
  */
-function executeCommand(command: string, args: string[], cwd: string = rootDir): Promise<void> {
+function execute_command(command: string, args: string[], cwd: string = rootDir): Promise<void> {
   return new Promise((resolve, reject) => {
     // Use shell on Windows for better command resolution
     const isWindows = process.platform === 'win32';
@@ -53,29 +53,29 @@ function executeCommand(command: string, args: string[], cwd: string = rootDir):
 /**
  * Main build function that orchestrates the build process
  */
-async function buildProject(): Promise<void> {
+async function build_project(): Promise<void> {
   try {
     console.log('Starting build process...');
     
     // Clean everything including generated icons
     console.log('Running clean script...');
-    await executeCommand('pnpm', ['clean']);
+    await execute_command('pnpm', ['clean']);
     
     // Generate icon components 
     console.log('Generating icon components...');
-    await executeCommand('pnpm', ['generate:icons']);
+    await execute_command('pnpm', ['generate:icons']);
     
     // Run type checking after icons are generated
     console.log('Running type checking...');
-    await executeCommand('pnpm', ['check']);
+    await execute_command('pnpm', ['check']);
     
     // Run svelte-package
     console.log('Building package with svelte-package...');
-    await executeCommand('pnpm', ['svelte-package']);
+    await execute_command('pnpm', ['svelte-package']);
     
     // Run clean_package script
     console.log('Running clean_package script...');
-    await executeCommand('pnpm', ['tsx', './scripts/clean_package.ts']);
+    await execute_command('pnpm', ['tsx', './scripts/clean_package.ts']);
     
     console.log('Build completed successfully!');
   } catch (error) {
@@ -85,4 +85,4 @@ async function buildProject(): Promise<void> {
 }
 
 // Execute the build process
-buildProject();
+build_project();

@@ -19,7 +19,7 @@ const pkgDir = path.join(rootDir, ".svelte-kit", "__package__");
 /**
  * Copies package files to the root directory, excluding package.json
  */
-async function copyPackageFiles(): Promise<void> {
+async function copy_package_files(): Promise<void> {
   try {
     console.log(`Copying files from ${pkgDir} to ${rootDir}...`);
     
@@ -44,4 +44,4 @@ async function copyPackageFiles(): Promise<void> {
 }
 
 // Execute the copy operation
-copyPackageFiles();
+copy_package_files();
